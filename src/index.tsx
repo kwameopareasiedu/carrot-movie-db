@@ -5,14 +5,18 @@ import App from "@/app.tsx";
 import "./index.scss";
 import { MantineProvider } from "@mantine/core";
 import defaultTheme from "@/config/theme.ts";
+import { QueryClientProvider } from "react-query";
+import queryClient from "@/config/query.ts";
 
 // Entry point of the app
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider theme={defaultTheme} withGlobalStyles withNormalizeCSS>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider theme={defaultTheme} withGlobalStyles>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </MantineProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
