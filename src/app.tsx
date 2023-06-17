@@ -1,8 +1,21 @@
+import { Route, Routes } from "react-router-dom";
+import { ROUTE_LIST } from "./config/routes.ts";
+import { lazy, Suspense } from "react";
+
+const ListMoviesPage = lazy(() => import("./pages/list-movies-page.tsx"));
+
 function App() {
   return (
-    <div>
-      <p className="font-bold">Hello World &amp; Carrot!</p>
-    </div>
+    <Routes>
+      <Route
+        path={ROUTE_LIST()}
+        element={
+          <Suspense>
+            <ListMoviesPage />
+          </Suspense>
+        }
+      />
+    </Routes>
   );
 }
 
