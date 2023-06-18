@@ -1,10 +1,13 @@
 import Movie from "@/models/movie.ts";
-import { Popover, Text, Title } from "@mantine/core";
+import { Button, Popover, Text, Title } from "@mantine/core";
 import { CiCalendarDate } from "react-icons/ci";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { AiOutlineStar } from "react-icons/ai";
 import { useDisclosure } from "@mantine/hooks";
+import { Link } from "react-router-dom";
+import { buildMovieDetailsRoute } from "@/config/routes.ts";
+import { BsCaretRight } from "react-icons/bs";
 
 dayjs.extend(advancedFormat);
 
@@ -16,11 +19,11 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
   const [titleOpened, { open, close }] = useDisclosure(false);
 
   return (
-    <div className="inline-block relative w-full max-w-[360px] h-[480px] overflow-hidden rounded-xl whitespace-normal">
+    <div className="inline-block relative w-full sm:w-[360px] h-[480px] overflow-hidden rounded-xl whitespace-normal">
       <img
         className="w-full h-full object-cover"
         src={import.meta.env.VITE_TMDB_POSTER_API_URL + movie.backdrop_path}
-        alt="Movie poster"
+        alt="Movie backdrop"
         loading="lazy"
       />
 
@@ -52,7 +55,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
 
             <div className="flex items-center gap-2">
               <CiCalendarDate size={18} />
-              <Text size="sm">{dayjs(movie.release_date).format("Do MMM YY")}</Text>
+              <Text size="sm">{dayjs(movie.release_date).format("Do MMM YYYY")}</Text>
             </div>
 
             <div className="flex items-center gap-2">
@@ -65,7 +68,11 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           </div>
         </div>
 
-        <p>{movie.overview.substring(0, 100)}...</p>
+        <p className="mb-4">{movie.overview.substring(0, 100)}...</p>
+
+        <Button component={Link} to={buildMovieDetailsRoute(movie.id)} color="dark" className="bg-gray-900" fullWidth>
+          View details <BsCaretRight />
+        </Button>
       </div>
     </div>
   );

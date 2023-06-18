@@ -23,7 +23,7 @@ type QueryOptions<QueryArgs, QueryError, QueryData> = Omit<
   "queryKey" | "queryFn"
 > & { additionalKey?: unknown[] };
 
-/** Utility for creating query hooks which abstracts ReactQuery boilerplate */
+/** Utility for creating query hooks which abstracts ReactQuery type boilerplate */
 export function createQuery<QueryData = any, QueryError = string | undefined>(
   queryKey: unknown[],
   queryFn: (context: QueryFunctionContext) => Promise<QueryData>
@@ -37,7 +37,7 @@ export function createQuery<QueryData = any, QueryError = string | undefined>(
   };
 }
 
-/** Utility for creating mutation hooks which abstracts ReactQuery boilerplate */
+/** Utility for creating mutation hooks which abstracts ReactQuery type boilerplate */
 type MutationOptions<MutationArgs, MutationError, MutationData> = Omit<
   UseMutationOptions<MutationData, MutationError, MutationArgs, unknown[]>,
   "mutationKey" | "mutationFn"

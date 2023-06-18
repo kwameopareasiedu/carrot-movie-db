@@ -1,3 +1,5 @@
-export const ROUTE_LIST = () => "/";
+/** Router configuration. These are functions to allow passing of parameters */
 
-export const ROUTE_DETAILS = (id?: string) => `/show/${id || ":id"}`;
+export const buildListMoviesRoute = () => "/";
+
+export const buildMovieDetailsRoute = (id?: string | number) => `/show/${id || ":id"}`;

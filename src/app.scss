@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slick-scrollbar {
+  &::-webkit-scrollbar {
+    @apply h-1;
+  }
+
+  * &::-webkit-scrollbar-track {
+    @apply bg-orange-600/25;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-orange-600;
+  }
+}
