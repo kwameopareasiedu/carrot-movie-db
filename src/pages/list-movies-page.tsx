@@ -5,6 +5,7 @@ import { MovieScrollList } from "@/components";
 import Movie, { MovieCategory } from "@/models/movie.ts";
 import { useSearchParams } from "react-router-dom";
 import { copyUnique } from "@/utils.ts";
+import { notifications } from "@mantine/notifications";
 
 export default function ListMoviesPage() {
   const [queryParams, setQueryParams] = useSearchParams();
@@ -33,6 +34,14 @@ export default function ListMoviesPage() {
       const newNowPlayingMovies = [...nowPlayingMovies];
       copyUnique(newNowPlayingMovies, data.results, isUnique);
       setNowPlayingMovies(newNowPlayingMovies);
+    },
+    onError: err => {
+      notifications.show({
+        color: "red",
+        title: "Something went wrong here!",
+        message: err || "An unknown error occurred",
+        autoClose: false
+      });
     }
   });
 
@@ -44,28 +53,52 @@ export default function ListMoviesPage() {
       const newPopularMovies = [...popularMovies];
       copyUnique(newPopularMovies, data.results, isUnique);
       setPopularMovies(newPopularMovies);
+    },
+    onError: err => {
+      notifications.show({
+        color: "red",
+        title: "Something went wrong here!",
+        message: err || "An unknown error occurred",
+        autoClose: false
+      });
     }
   });
 
   const topRatedMovieQuery = useFetchMovies({
-    additionalKey: [MovieCategory.TOP_RATED, pages.popular],
+    additionalKey: [MovieCategory.TOP_RATED, pages.topRated],
     enabled,
     onSuccess: data => {
       const isUnique = (movie: Movie) => !topRatedMovies.map(m => m.id).includes(movie.id);
       const newTopRatedMovies = [...topRatedMovies];
       copyUnique(newTopRatedMovies, data.results, isUnique);
       setTopRatedMovies(newTopRatedMovies);
+    },
+    onError: err => {
+      notifications.show({
+        color: "red",
+        title: "Something went wrong here!",
+        message: err || "An unknown error occurred",
+        autoClose: false
+      });
     }
   });
 
   const upcomingMovieQuery = useFetchMovies({
-    additionalKey: [MovieCategory.UPCOMING, pages.popular],
+    additionalKey: [MovieCategory.UPCOMING, pages.upcoming],
     enabled,
     onSuccess: data => {
       const isUnique = (movie: Movie) => !upcomingMovies.map(m => m.id).includes(movie.id);
       const newUpcomingMovies = [...upcomingMovies];
       copyUnique(newUpcomingMovies, data.results, isUnique);
       setUpcomingMovies(newUpcomingMovies);
+    },
+    onError: err => {
+      notifications.show({
+        color: "red",
+        title: "Something went wrong here!",
+        message: err || "An unknown error occurred",
+        autoClose: false
+      });
     }
   });
 
@@ -75,11 +108,20 @@ export default function ListMoviesPage() {
       const newSearchedMovies = [...searchedMovies];
       copyUnique(newSearchedMovies, data.results, isUnique);
       setSearchedMovies(newSearchedMovies);
+    },
+    onError: err => {
+      notifications.show({
+        color: "red",
+        title: "Something went wrong here!",
+        message: err || "An unknown error occurred",
+        autoClose: false
+      });
     }
   });
 
   const onSearchKeyChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setQueryParams({ ...queryParams, key: e.target.value }, { replace: true });
+    setPages({ ...pages, search: 1 });
     setSearchedMovies([]);
   };
 
@@ -109,7 +151,7 @@ export default function ListMoviesPage() {
             size="lg"
             radius={0}
             value={searchKey}
-            placeholder="Search for movie..."
+            placeholder="Search for movies..."
             onChange={onSearchKeyChanged}
           />
 

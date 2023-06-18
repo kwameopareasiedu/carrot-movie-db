@@ -2,4 +2,4 @@
 
 export const buildListMoviesRoute = () => "/";
 
-export const buildMovieDetailsRoute = (id?: string | number) => `/show/${id || ":id"}`;
+export const buildMovieDetailsRoute = (id?: string | number) => `/${id || ":id"}`;
