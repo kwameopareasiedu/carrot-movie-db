@@ -142,7 +142,7 @@ export default function MovieViewPage() {
                 <div className="grid grid-cols-3 md:grid-cols-4 gap-8">
                   {movieCastQuery.data?.cast.map(cast => (
                     <div key={cast.id} className="flex flex-col gap-2">
-                      <Avatar src={buildMoviePosterUrl(cast.profile_path)} size="xl">
+                      <Avatar className="mx-auto" src={buildMoviePosterUrl(cast.profile_path)} size="xl">
                         {cast.name
                           .split(" ")
                           .map(p => p.charAt(0))
