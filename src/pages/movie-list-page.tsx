@@ -139,18 +139,19 @@ export default function MovieListPage() {
 
   return (
     <>
-      <Box className="fixed top-0 left-0 w-screen z-10 py-4 px-6 md:px-16 bg-white shadow-lg">
+      <Box className="fixed top-0 left-0 w-screen z-10 py-2 px-6 md:px-16 bg-white shadow-lg">
         <Group className="w-full">
           <Box sx={{ flex: 1 }}>
             <Title size="h2" weight="bold" variant="gradient" gradient={{ from: "#EA371E", to: "#352C3A", deg: 90 }}>
               The Carrot Movie DB
             </Title>
 
-            <Text italic>The only movie recommender you&apos;ll need</Text>
+            <Text size="sm" italic>
+              The only movie recommender you&apos;ll need
+            </Text>
           </Box>
 
           <TextInput
-            size="lg"
             radius={0}
             value={searchKey}
             placeholder="Search for movies..."
@@ -161,7 +162,6 @@ export default function MovieListPage() {
           />
 
           <Button
-            size="lg"
             radius={0}
             className="w-full lg:w-auto bg-orange-600"
             loading={searchMovieMutation.isLoading}
