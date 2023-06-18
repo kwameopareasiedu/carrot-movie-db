@@ -40,8 +40,8 @@ export default function MovieViewPage() {
     <div className="min-h-screen">
       {movieQuery.isLoading && (
         <div className="flex items-center justify-center py-12 gap-4">
-          <Loader className="inline-block" />
-          <Text>Fetching wait...</Text>
+          <Loader className="inline-block" size="sm" />
+          <Text size="sm">Please wait...</Text>
         </div>
       )}
 
