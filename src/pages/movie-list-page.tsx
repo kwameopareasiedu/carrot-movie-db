@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import { copyUnique } from "@/utils.ts";
 import { notifications } from "@mantine/notifications";
 
-export default function ListMoviesPage() {
+export default function MovieListPage() {
   const [queryParams, setQueryParams] = useSearchParams();
   const searchKey = queryParams.get("key") || "";
   const enabled = !searchKey;

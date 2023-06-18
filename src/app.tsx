@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { buildListMoviesRoute } from "@/config/routes.ts";
+import { buildListMoviesRoute, buildMovieDetailsRoute } from "@/config/routes.ts";
 import { lazy, Suspense } from "react";
 
-const ListMoviesPage = lazy(() => import("@/pages/list-movies-page.tsx"));
+const MovieListPage = lazy(() => import("@/pages/movie-list-page.tsx"));
+const MovieViewPage = lazy(() => import("@/pages/movie-view-page.tsx"));
 
 function App() {
   return (
@@ -11,7 +12,15 @@ function App() {
         path={buildListMoviesRoute()}
         element={
           <Suspense>
-            <ListMoviesPage />
+            <MovieListPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path={buildMovieDetailsRoute()}
+        element={
+          <Suspense>
+            <MovieViewPage />
           </Suspense>
         }
       />

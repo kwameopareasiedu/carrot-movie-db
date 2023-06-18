@@ -12,3 +12,6 @@ export const copyUnique = <T>(dest: T[], src: T[], isUnique: (obj: T) => boolean
     if (isUnique(obj)) dest.push(obj);
   }
 };
+
+/** Joins the env variable to get the full URL of movie posters. Path always starts with a leading / */
+export const buildMoviePosterUrl = (path: string) => import.meta.env.VITE_TMDB_POSTER_API_URL + path;
