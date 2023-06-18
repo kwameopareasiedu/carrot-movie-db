@@ -12,7 +12,7 @@ import { Notifications } from "@mantine/notifications";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
     <MantineProvider theme={defaultTheme} withGlobalStyles>
-      <BrowserRouter>
+      <BrowserRouter basename="/carrot-movie-db">
         <Notifications />
         <App />
       </BrowserRouter>
