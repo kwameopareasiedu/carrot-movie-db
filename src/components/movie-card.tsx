@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { AiOutlineStar } from "react-icons/ai";
 import { useDisclosure } from "@mantine/hooks";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { buildMovieDetailsRoute } from "@/config/routes.ts";
 import { BsCaretRight } from "react-icons/bs";
 
@@ -16,6 +16,7 @@ interface MovieCardProps {
 }
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
+  const [queryParams] = useSearchParams();
   const [titleOpened, { open, close }] = useDisclosure(false);
 
   return (
@@ -70,7 +71,13 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
 
         <p className="mb-4">{movie.overview.substring(0, 100)}...</p>
 
-        <Button component={Link} to={buildMovieDetailsRoute(movie.id)} color="dark" className="bg-gray-900" fullWidth>
+        <Button
+          component={Link}
+          to={{ pathname: buildMovieDetailsRoute(movie.id), search: `?key=${queryParams.get("key") || ""}` }}
+          color="dark"
+          className="bg-gray-900"
+          fullWidth
+        >
           View details <BsCaretRight />
         </Button>
       </div>

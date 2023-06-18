@@ -1,7 +1,7 @@
 import { Box, Button, Group, Text, TextInput, Title } from "@mantine/core";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useFetchMovies, useSearchMovies } from "@/query/movie.query.ts";
-import { MovieScrollList } from "@/components";
+import { Footer, MovieScrollList } from "@/components";
 import Movie, { MovieCategory } from "@/models/movie.ts";
 import { useSearchParams } from "react-router-dom";
 import { copyUnique } from "@/utils.ts";
@@ -126,8 +126,10 @@ export default function ListMoviesPage() {
   };
 
   const triggerSearch = () => {
-    searchMovieMutation.mutate({ key: searchKey, page: pages.search });
-    setSearchedMovies([]);
+    if (searchKey) {
+      searchMovieMutation.mutate({ key: searchKey, page: pages.search });
+      setSearchedMovies([]);
+    }
   };
 
   useEffect(() => {
@@ -153,6 +155,9 @@ export default function ListMoviesPage() {
             value={searchKey}
             placeholder="Search for movies..."
             onChange={onSearchKeyChanged}
+            onKeyUp={e => {
+              if (e.key === "Enter") triggerSearch();
+            }}
           />
 
           <Button
@@ -161,6 +166,7 @@ export default function ListMoviesPage() {
             className="w-full lg:w-auto bg-orange-600"
             loading={searchMovieMutation.isLoading}
             onClick={triggerSearch}
+            disabled={!searchKey}
           >
             Search
           </Button>
@@ -212,6 +218,8 @@ export default function ListMoviesPage() {
           </>
         )}
       </div>
+
+      <Footer />
     </>
   );
 }
